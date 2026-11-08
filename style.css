@@ -1,0 +1,936 @@
+/* ==========================================================================
+   NEONCORE — Gamer sign-up form
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   Fonts
+   -------------------------------------------------------------------------- */
+
+@font-face {
+  font-family: "Orbitron";
+  src: url("./assets/fonts/orbitron/orbitron-variable.ttf") format("truetype");
+  font-weight: 400 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "JetBrains Mono";
+  src: url("./assets/fonts/jetbrains-mono/jetbrains-mono-variable.ttf") format("truetype");
+  font-weight: 100 800;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* --------------------------------------------------------------------------
+   Tokens
+   -------------------------------------------------------------------------- */
+
+:root {
+  --neutral-950: hsl(214 37% 4%);
+  --neutral-900: hsl(210 39% 7%);
+  --neutral-800: hsl(211 30% 13%);
+  --neutral-700: hsl(211 22% 24%);
+  --neutral-600: hsl(210 18% 42%);
+  --neutral-500: hsl(211 14% 50%);
+  --neutral-400: hsl(211 13% 55%);
+  --neutral-300: hsl(211 18% 68%);
+  --neutral-100: hsl(208 49% 92%);
+  --neutral-50: hsl(204 60% 97%);
+
+  --lime-500: hsl(77 90% 59%);
+  --lime-700: hsl(77 67% 39%);
+  --red-400: hsl(4 100% 74%);
+  --amber-400: hsl(40 100% 65%);
+
+  --navy-950: hsl(214 60% 2%);
+
+  --font-display: "Orbitron", "Arial Black", sans-serif;
+  --font-mono: "JetBrains Mono", "Courier New", monospace;
+
+  --ring: 0 0 0 2px var(--neutral-950), 0 0 0 4px var(--lime-500);
+}
+
+/* --------------------------------------------------------------------------
+   Base
+   -------------------------------------------------------------------------- */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  color-scheme: dark;
+  scrollbar-color: var(--neutral-700) var(--neutral-950);
+}
+
+::-webkit-scrollbar {
+  width: 12px;
+  height: 12px;
+}
+
+::-webkit-scrollbar-track {
+  background-color: var(--neutral-950);
+}
+
+::-webkit-scrollbar-thumb {
+  border: 3px solid var(--neutral-950);
+  background-color: var(--neutral-700);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: var(--neutral-600);
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  margin: 0;
+  background-color: var(--neutral-950);
+  color: var(--neutral-100);
+  font-family: var(--font-mono);
+  font-size: 16px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+[hidden] {
+  display: none !important;
+}
+
+img {
+  max-width: 100%;
+}
+
+a {
+  color: var(--neutral-100);
+  text-decoration-color: var(--lime-500);
+  text-underline-offset: 0.2em;
+}
+
+a:hover {
+  color: var(--lime-500);
+}
+
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+[tabindex]:focus-visible {
+  outline: 2px solid var(--lime-500);
+  outline-offset: 3px;
+}
+
+::selection {
+  background-color: var(--lime-500);
+  color: var(--navy-950);
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* --------------------------------------------------------------------------
+   Background
+   -------------------------------------------------------------------------- */
+
+.backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background:
+    radial-gradient(60% 55% at 88% 6%, hsl(77 90% 59% / 0.08), transparent 70%),
+    radial-gradient(50% 60% at 0% 100%, hsl(211 30% 13% / 0.55), transparent 70%),
+    var(--neutral-950);
+  pointer-events: none;
+}
+
+.backdrop::after {
+  content: "";
+  position: absolute;
+  top: -22rem;
+  right: -20rem;
+  width: 60rem;
+  height: 60rem;
+  background: url("./assets/images/pattern-backdrop.svg") center / contain no-repeat;
+  opacity: 0.55;
+}
+
+/* --------------------------------------------------------------------------
+   Layout
+   -------------------------------------------------------------------------- */
+
+.container {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 560px);
+  gap: clamp(2.5rem, 6vw, 6rem);
+  align-items: start;
+  width: min(100% - 3rem, 1180px);
+  margin-inline: auto;
+  padding-block: 4rem 3rem;
+  flex: 1;
+}
+
+/* --------------------------------------------------------------------------
+   Brand
+   -------------------------------------------------------------------------- */
+
+.brand {
+  padding-top: 0.5rem;
+}
+
+.logo {
+  display: block;
+  width: 169px;
+  height: auto;
+}
+
+.eyebrow {
+  margin: 2.5rem 0 0;
+  color: var(--lime-500);
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 700;
+  line-height: 1rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.brand h1 {
+  margin: 1rem 0 1.5rem;
+  color: var(--neutral-50);
+  font-family: var(--font-display);
+  font-size: clamp(3rem, 5.4vw, 4.5rem);
+  font-weight: 800;
+  line-height: 1.02;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.brand h1 span {
+  color: var(--lime-500);
+  text-shadow: 0 0 2rem hsl(77 90% 59% / 0.35);
+}
+
+.brand-copy {
+  max-width: 42ch;
+  margin: 0 0 2.5rem;
+  color: var(--neutral-300);
+  font-size: 0.875rem;
+  line-height: 1.5rem;
+}
+
+/* --------------------------------------------------------------------------
+   Operator ID readout (desktop extra)
+   -------------------------------------------------------------------------- */
+
+.operator {
+  position: relative;
+  padding: 1.25rem 1.5rem 1.5rem;
+  border: 1px solid var(--neutral-800);
+  background:
+    linear-gradient(180deg, hsl(210 39% 7% / 0.9), hsl(210 39% 7% / 0.45)),
+    repeating-linear-gradient(90deg, transparent 0 3px, hsl(211 30% 13% / 0.18) 3px 4px);
+}
+
+.operator::before {
+  content: "";
+  position: absolute;
+  top: -1px;
+  left: -1px;
+  width: 2.5rem;
+  height: 2px;
+  background-color: var(--lime-500);
+}
+
+.operator-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.operator-label {
+  color: var(--neutral-400);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.operator-status {
+  padding: 0.15rem 0.5rem;
+  border: 1px solid var(--neutral-700);
+  color: var(--neutral-400);
+  font-size: 0.625rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.operator-status.is-ready {
+  border-color: hsl(77 90% 59% / 0.6);
+  color: var(--lime-500);
+  box-shadow: 0 0 1rem hsl(77 90% 59% / 0.15);
+}
+
+.operator-name {
+  margin: 1rem 0 1.25rem;
+  overflow-wrap: anywhere;
+  color: var(--neutral-50);
+  font-family: var(--font-display);
+  font-size: clamp(1.5rem, 2.4vw, 2rem);
+  font-weight: 800;
+  line-height: 1.1;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.operator-name.is-empty {
+  color: var(--neutral-600);
+}
+
+.operator-checks {
+  display: grid;
+  gap: 0.5rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.operator-checks li {
+  display: flex;
+  align-items: center;
+  gap: 0.625rem;
+  color: var(--neutral-500);
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.check-dot {
+  flex: 0 0 auto;
+  width: 1rem;
+  height: 1rem;
+  border: 1px solid var(--neutral-700);
+}
+
+.operator-checks li.is-valid {
+  color: var(--neutral-300);
+}
+
+.operator-checks li.is-valid .check-dot {
+  border-color: var(--lime-500);
+  background: url("./assets/images/icon-tick-20.svg") center / 1rem 1rem no-repeat;
+}
+
+.check-state {
+  margin-left: auto;
+  color: var(--neutral-600);
+  font-size: 0.625rem;
+  letter-spacing: 0.14em;
+}
+
+.operator-checks li.is-valid .check-state {
+  color: var(--lime-500);
+}
+
+/* --------------------------------------------------------------------------
+   Form panel
+   -------------------------------------------------------------------------- */
+
+.form-section {
+  position: relative;
+  padding: clamp(1.5rem, 4vw, 2.5rem);
+  border: 1px solid var(--neutral-800);
+  background:
+    linear-gradient(180deg, hsl(210 39% 7% / 0.98), hsl(210 39% 7% / 0.88)),
+    repeating-linear-gradient(0deg, transparent 0 3px, hsl(211 30% 13% / 0.12) 3px 4px);
+  box-shadow: 0 1.5rem 5rem hsl(214 60% 2% / 0.6);
+}
+
+.form-section::before,
+.form-section::after {
+  content: "";
+  position: absolute;
+  width: 3.5rem;
+  height: 2px;
+  background-color: var(--lime-500);
+}
+
+.form-section::before {
+  top: -1px;
+  left: 1.5rem;
+}
+
+.form-section::after {
+  right: 1.5rem;
+  bottom: -1px;
+  background-color: var(--neutral-700);
+}
+
+.form-header {
+  padding-bottom: 1.5rem;
+  margin-bottom: 1.75rem;
+  border-bottom: 1px solid var(--neutral-800);
+}
+
+.form-header .eyebrow {
+  margin-top: 0;
+  color: var(--neutral-500);
+}
+
+.form-header h2 {
+  margin: 0.5rem 0 0.25rem;
+  color: var(--neutral-50);
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  font-weight: 800;
+  line-height: 2rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.form-header > p:last-child {
+  margin: 0;
+  color: var(--neutral-400);
+  font-size: 0.875rem;
+  line-height: 1.5rem;
+}
+
+/* --------------------------------------------------------------------------
+   Fields
+   -------------------------------------------------------------------------- */
+
+.form-group {
+  margin-bottom: 1.25rem;
+}
+
+.label-row {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.75rem;
+  margin-bottom: 0.5rem;
+}
+
+.form-group label {
+  color: var(--neutral-100);
+  font-family: var(--font-mono);
+  font-size: 0.875rem;
+  font-weight: 700;
+  line-height: 1.5rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.field-hint {
+  color: var(--neutral-500);
+  font-size: 0.6875rem;
+  line-height: 1rem;
+  letter-spacing: 0.02em;
+  text-align: right;
+}
+
+.input-shell {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  min-height: 3.25rem;
+  padding: 0 0.75rem;
+  border: 1px solid var(--neutral-700);
+  background-color: var(--navy-950);
+  transition: border-color 150ms ease, box-shadow 150ms ease;
+}
+
+.input-shell:hover {
+  border-color: var(--neutral-600);
+}
+
+.input-shell:focus-within {
+  border-color: var(--lime-500);
+  box-shadow: 0 0 0 1px var(--lime-500), 0 0 1.5rem hsl(77 90% 59% / 0.12);
+}
+
+.input-shell input {
+  flex: 1;
+  width: 100%;
+  min-width: 0;
+  padding: 0.875rem 0;
+  border: 0;
+  outline: 0;
+  background: transparent;
+  color: var(--neutral-50);
+  font-family: var(--font-mono);
+  font-size: 1rem;
+  line-height: 1.5rem;
+  letter-spacing: 0.02em;
+  appearance: none;
+}
+
+.input-shell input::placeholder {
+  color: var(--neutral-500);
+  opacity: 1;
+}
+
+.input-shell input:-webkit-autofill {
+  -webkit-text-fill-color: var(--neutral-50);
+  transition: background-color 9999s ease-out;
+}
+
+.form-group.has-error .input-shell {
+  border-color: var(--red-400);
+  box-shadow: 0 0 0 1px hsl(4 100% 74% / 0.35);
+}
+
+.form-group.has-error .input-shell:focus-within {
+  box-shadow: 0 0 0 1px var(--red-400), 0 0 1.5rem hsl(4 100% 74% / 0.12);
+}
+
+.field-valid {
+  display: none;
+  flex: 0 0 auto;
+  width: 1.25rem;
+  height: 1.25rem;
+  background: url("./assets/images/icon-tick-20.svg") center / contain no-repeat;
+}
+
+.form-group.is-valid .field-valid {
+  display: block;
+}
+
+.toggle-password {
+  display: grid;
+  place-items: center;
+  flex: 0 0 auto;
+  min-width: 2.75rem;
+  min-height: 2.75rem;
+  margin-right: -0.5rem;
+  padding: 0.5rem;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  touch-action: manipulation;
+}
+
+.toggle-password img {
+  display: block;
+}
+
+.toggle-password:hover img {
+  filter: brightness(1.35) saturate(1.3);
+}
+
+.toggle-password:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.field-error {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.375rem;
+  margin: 0.5rem 0 0;
+  color: var(--red-400);
+  font-size: 0.75rem;
+  line-height: 1rem;
+  letter-spacing: 0.02em;
+}
+
+.field-error img {
+  flex: 0 0 auto;
+}
+
+/* --------------------------------------------------------------------------
+   Password strength
+   -------------------------------------------------------------------------- */
+
+.strength {
+  display: grid;
+  gap: 0.375rem;
+  margin-top: 0.625rem;
+}
+
+.strength-track {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.375rem;
+}
+
+.strength-track span {
+  height: 4px;
+  background-color: var(--neutral-800);
+  transition: background-color 200ms ease, box-shadow 200ms ease;
+}
+
+.strength-label {
+  min-height: 1rem;
+  margin: 0;
+  color: var(--neutral-500);
+  font-size: 0.75rem;
+  line-height: 1rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.strength[data-level=""] .strength-label {
+  visibility: hidden;
+}
+
+.strength[data-level="weak"] .strength-track span:nth-child(-n + 1) {
+  background-color: var(--red-400);
+}
+
+.strength[data-level="weak"] .strength-label {
+  color: var(--red-400);
+}
+
+.strength[data-level="fair"] .strength-track span:nth-child(-n + 2) {
+  background-color: var(--amber-400);
+}
+
+.strength[data-level="fair"] .strength-label {
+  color: var(--amber-400);
+}
+
+.strength[data-level="good"] .strength-track span:nth-child(-n + 3) {
+  background-color: var(--lime-500);
+}
+
+.strength[data-level="good"] .strength-label {
+  color: var(--lime-500);
+}
+
+.strength[data-level="strong"] .strength-track span:nth-child(-n + 4) {
+  background-color: var(--lime-500);
+}
+
+.strength[data-level="strong"] .strength-label {
+  color: var(--lime-500);
+}
+
+.strength[data-level="strong"] .strength-track span {
+  box-shadow: 0 0 0.75rem hsl(77 90% 59% / 0.35);
+}
+
+/* --------------------------------------------------------------------------
+   Terms checkbox
+   -------------------------------------------------------------------------- */
+
+.form-group--checkbox {
+  margin-top: 1.5rem;
+}
+
+.checkbox-row {
+  display: flex;
+  align-items: center;
+  min-height: 1.5rem;
+  gap: 0.75rem;
+}
+
+.checkbox-row input[type="checkbox"] {
+  flex: 0 0 auto;
+  width: 1.25rem;
+  height: 1.25rem;
+  margin: 0;
+  border: 1px solid var(--neutral-700);
+  border-radius: 0;
+  background-color: var(--navy-950);
+  cursor: pointer;
+  appearance: none;
+  transition: border-color 150ms ease, background-color 150ms ease;
+}
+
+.checkbox-row input[type="checkbox"]:hover {
+  border-color: var(--neutral-500);
+}
+
+.checkbox-row input[type="checkbox"]:checked {
+  border-color: var(--lime-500);
+  background: var(--lime-500) url("./assets/images/icon-tick-16.svg") center / 1rem 1rem no-repeat;
+}
+
+.form-group--checkbox.has-error input[type="checkbox"] {
+  border-color: var(--red-400);
+}
+
+.checkbox-row label {
+  color: var(--neutral-300);
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 400;
+  line-height: 1.25rem;
+  letter-spacing: 0.02em;
+  text-transform: none;
+  cursor: pointer;
+}
+
+.checkbox-row label a {
+  color: var(--neutral-100);
+  font-weight: 700;
+}
+
+.checkbox-row label a:hover {
+  color: var(--lime-500);
+}
+
+/* --------------------------------------------------------------------------
+   Submit button
+   -------------------------------------------------------------------------- */
+
+.submit-button {
+  display: block;
+  width: 100%;
+  min-height: 3.5rem;
+  margin-top: 1.75rem;
+  padding: 1rem 1.5rem;
+  border: 1px solid var(--lime-500);
+  border-radius: 0;
+  background-color: var(--lime-500);
+  color: var(--navy-950);
+  font-family: var(--font-display);
+  font-size: 1rem;
+  font-weight: 800;
+  line-height: 1.5rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background-color 150ms ease, box-shadow 150ms ease, color 150ms ease;
+}
+
+.submit-button:hover:not(:disabled):not([aria-disabled="true"]) {
+  background-color: var(--lime-700);
+  box-shadow: 0 0 2rem hsl(77 90% 59% / 0.28);
+}
+
+.submit-button:focus-visible {
+  outline: 2px solid var(--neutral-50);
+  outline-offset: 3px;
+}
+
+.submit-button:disabled,
+.submit-button[aria-disabled="true"] {
+  cursor: progress;
+}
+
+.submit-button.is-loading {
+  background-color: transparent;
+  color: var(--lime-500);
+  box-shadow: inset 0 0 1.5rem hsl(77 90% 59% / 0.12);
+}
+
+.submit-caret {
+  display: none;
+}
+
+.submit-button.is-loading .submit-caret {
+  display: inline;
+  animation: caret-blink 1s steps(1, end) infinite;
+}
+
+@keyframes caret-blink {
+  50% {
+    opacity: 0;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Sign-up / log-in switch
+   -------------------------------------------------------------------------- */
+
+.auth-switch {
+  margin: 1.5rem 0 0;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--neutral-800);
+  color: var(--neutral-400);
+  font-size: 0.75rem;
+  line-height: 1.5rem;
+  text-align: center;
+}
+
+.auth-switch a {
+  color: var(--lime-500);
+  font-weight: 700;
+}
+
+.auth-switch a:hover {
+  color: var(--lime-700);
+}
+
+/* --------------------------------------------------------------------------
+   Success view
+   -------------------------------------------------------------------------- */
+
+.form-success {
+  display: grid;
+  justify-items: center;
+  gap: 0.75rem;
+  padding: 2.5rem 0.5rem 2rem;
+  text-align: center;
+}
+
+.form-success > img {
+  width: 78px;
+  height: 72px;
+  margin-bottom: 0.75rem;
+  filter: drop-shadow(0 0 1.5rem hsl(77 90% 59% / 0.35));
+}
+
+.success-eyebrow {
+  margin: 0;
+  color: var(--lime-500);
+  font-size: 0.75rem;
+  font-weight: 700;
+  line-height: 1rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.form-success h2 {
+  margin: 0;
+  color: var(--neutral-50);
+  font-family: var(--font-display);
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  font-weight: 800;
+  line-height: 1.2;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.form-success h2:focus-visible {
+  outline: 2px solid var(--lime-500);
+  outline-offset: 4px;
+}
+
+.form-success p {
+  max-width: 34ch;
+  margin: 0;
+  color: var(--neutral-300);
+  font-size: 0.875rem;
+  line-height: 1.5rem;
+}
+
+.form-success .success-note {
+  margin-top: 0.5rem;
+  color: var(--lime-500);
+  font-size: 0.75rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+/* --------------------------------------------------------------------------
+   Footer
+   -------------------------------------------------------------------------- */
+
+.attribution {
+  padding: 1.5rem;
+  color: var(--neutral-500);
+  font-size: 0.75rem;
+  line-height: 1.5rem;
+  text-align: center;
+}
+
+.attribution a {
+  color: var(--neutral-300);
+}
+
+.attribution a:hover {
+  color: var(--lime-500);
+}
+
+/* --------------------------------------------------------------------------
+   Responsive
+   -------------------------------------------------------------------------- */
+
+@media (max-width: 1080px) {
+  .container {
+    grid-template-columns: minmax(0, 1fr);
+    width: min(100% - 2rem, 600px);
+    gap: 2.5rem;
+    padding-block: 2.5rem 2rem;
+  }
+
+  .brand {
+    padding-top: 0;
+  }
+
+  .brand h1 {
+    margin-block: 1rem 1.25rem;
+    font-size: 2.5rem;
+    line-height: 3rem;
+  }
+
+  .brand-copy {
+    margin-bottom: 0;
+  }
+
+  .operator {
+    display: none;
+  }
+}
+
+@media (max-width: 500px) {
+  .container {
+    width: min(100% - 1.5rem, 600px);
+    gap: 1.75rem;
+    padding-block: 1.5rem;
+  }
+
+  .logo {
+    width: 148px;
+  }
+
+  .eyebrow {
+    margin-top: 1.5rem;
+  }
+
+  .brand h1 {
+    margin-block: 0.75rem 1rem;
+    font-size: 2.25rem;
+    line-height: 2.5rem;
+  }
+
+  .form-section {
+    padding: 1.25rem;
+  }
+
+  .form-header {
+    padding-bottom: 1.25rem;
+    margin-bottom: 1.25rem;
+  }
+
+  .form-header h2 {
+    font-size: 1.25rem;
+  }
+
+  .field-hint {
+    font-size: 0.625rem;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Reduced motion
+   -------------------------------------------------------------------------- */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}

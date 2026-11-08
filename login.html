@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Log in to your NEONCORE operator identity.">
+
+  <link rel="icon" type="image/png" sizes="32x32" href="./assets/images/favicon-32x32.png">
+  <link rel="preload" href="./assets/fonts/orbitron/orbitron-variable.ttf" as="font" type="font/ttf" crossorigin>
+  <link rel="preload" href="./assets/fonts/jetbrains-mono/jetbrains-mono-variable.ttf" as="font" type="font/ttf"
+    crossorigin>
+  <link rel="stylesheet" href="style.css">
+
+  <title>Frontend Mentor | Gamer log-in form</title>
+</head>
+
+<body>
+
+  <div class="backdrop" aria-hidden="true"></div>
+
+  <main class="container">
+
+    <section class="brand" aria-labelledby="brand-title">
+      <img class="logo" src="./assets/images/logo.svg" alt="NEONCORE" width="169" height="32">
+
+      <p class="eyebrow">Competitive gaming network</p>
+
+      <h1 id="brand-title">Re-enter the <span>nexus</span></h1>
+
+      <p class="brand-copy">
+        Welcome back, operator. Authenticate your identity to reconnect
+        to the network and pick up where you left off.
+      </p>
+
+      <aside class="operator" aria-labelledby="session-label">
+        <div class="operator-top">
+          <span class="operator-label" id="session-label">Session</span>
+          <span class="operator-status" id="session-status">Standby</span>
+        </div>
+
+        <p class="operator-name is-empty" id="session-name">Guest</p>
+
+        <ul class="operator-checks">
+          <li data-check="identifier">
+            <span class="check-dot" aria-hidden="true"></span>
+            <span class="check-name">Identity</span>
+            <span class="check-state">Pending</span>
+          </li>
+          <li data-check="password">
+            <span class="check-dot" aria-hidden="true"></span>
+            <span class="check-name">Credentials</span>
+            <span class="check-state">Pending</span>
+          </li>
+          <li data-check="session">
+            <span class="check-dot" aria-hidden="true"></span>
+            <span class="check-name">Secure session</span>
+            <span class="check-state">Pending</span>
+          </li>
+        </ul>
+      </aside>
+    </section>
+
+    <section class="form-section">
+
+      <div class="form-view" id="form-view">
+        <div class="form-header">
+          <p class="eyebrow">Access protocol // 02</p>
+          <h2 id="form-title">Operator login</h2>
+          <p>Credentials required</p>
+        </div>
+
+        <form id="login-form" novalidate>
+
+          <div class="form-group" data-field="identifier">
+            <div class="label-row">
+              <label for="identifier">Callsign or email</label>
+              <span class="field-hint" id="identifier-hint">Your operator ID</span>
+            </div>
+
+            <div class="input-shell">
+              <input type="text" id="identifier" name="identifier" placeholder="Vortex_07 or you@example.com"
+                autocomplete="username" spellcheck="false" required aria-describedby="identifier-hint identifier-error">
+              <span class="field-valid" aria-hidden="true"></span>
+            </div>
+
+            <p class="field-error" id="identifier-error" hidden>
+              <img src="./assets/images/icon-alert.svg" alt="" width="16" height="16">
+              <span></span>
+            </p>
+          </div>
+
+          <div class="form-group" data-field="password">
+            <div class="label-row">
+              <label for="login-password">Password</label>
+            </div>
+
+            <div class="input-shell">
+              <input type="password" id="login-password" name="password" placeholder="Enter your password"
+                autocomplete="current-password" required aria-describedby="login-password-error">
+              <span class="field-valid" aria-hidden="true"></span>
+              <button type="button" class="toggle-password" data-target="login-password" aria-label="Show password"
+                aria-pressed="false" aria-controls="login-password">
+                <img src="./assets/images/icon-eye.svg" alt="" width="20" height="20">
+              </button>
+            </div>
+
+            <p class="field-error" id="login-password-error" hidden>
+              <img src="./assets/images/icon-alert.svg" alt="" width="16" height="16">
+              <span></span>
+            </p>
+          </div>
+
+          <button type="submit" class="submit-button" id="login-button">
+            <span id="login-label">Access Account</span>
+            <span class="submit-caret" aria-hidden="true">_</span>
+          </button>
+
+          <p class="sr-only" id="form-status" role="status" aria-live="polite"></p>
+        </form>
+
+        <p class="auth-switch">
+          New to NEONCORE?
+          <a href="index.html">Initialize an account</a>
+        </p>
+      </div>
+
+      <div class="form-success" id="success-message" hidden>
+        <img src="./assets/images/icon-hex-check.svg" alt="" width="78" height="72">
+        <p class="success-eyebrow">Channel open</p>
+        <h2 id="success-heading" tabindex="-1">Access granted</h2>
+        <p>Your operator session is now active.</p>
+        <p class="success-note">Welcome back to NEONCORE.</p>
+      </div>
+
+    </section>
+
+  </main>
+
+  <footer class="attribution">
+    Challenge by
+    <a href="https://www.frontendmentor.io?ref=challenge">Frontend Mentor</a>.
+    Coded by
+    <a href="https://github.com/vicxxsotop-rgb" target="_blank" rel="noopener noreferrer">
+      vicxxsotop-rgb
+    </a>.
+  </footer>
+
+  <script src="login.js"></script>
+
+</body>
+
+</html>
