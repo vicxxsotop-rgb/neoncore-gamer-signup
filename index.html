@@ -5,11 +5,28 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Create your NEONCORE operator identity and join the nexus.">
+  <meta name="theme-color" content="#060a0e">
+
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="NEONCORE">
+  <meta property="og:title" content="NEONCORE — Gamer sign-up form">
+  <meta property="og:description" content="Create your NEONCORE operator identity and join the nexus.">
+  <meta property="og:url" content="https://vicxxsotop-rgb.github.io/neoncore-gamer-signup/">
+  <meta property="og:image" content="https://vicxxsotop-rgb.github.io/neoncore-gamer-signup/screenshots/og-signup.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="NEONCORE sign-up form with the heading Join the nexus">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="NEONCORE — Gamer sign-up form">
+  <meta name="twitter:description" content="Create your NEONCORE operator identity and join the nexus.">
+  <meta name="twitter:image" content="https://vicxxsotop-rgb.github.io/neoncore-gamer-signup/screenshots/og-signup.png">
 
   <link rel="icon" type="image/png" sizes="32x32" href="./assets/images/favicon-32x32.png">
-  <link rel="preload" href="./assets/fonts/orbitron/orbitron-variable.ttf" as="font" type="font/ttf" crossorigin>
-  <link rel="preload" href="./assets/fonts/jetbrains-mono/jetbrains-mono-variable.ttf" as="font" type="font/ttf"
+  <link rel="preload" href="./assets/fonts/orbitron/orbitron-latin-wght-normal.woff2" as="font" type="font/woff2"
     crossorigin>
+  <link rel="preload" href="./assets/fonts/jetbrains-mono/jetbrains-mono-latin-wght-normal.woff2" as="font"
+    type="font/woff2" crossorigin>
   <link rel="stylesheet" href="style.css">
 
   <title>Frontend Mentor | Gamer sign-up form</title>
@@ -146,6 +163,10 @@
               </p>
             </div>
 
+            <p class="caps-warning" id="password-caps-warning" role="status" hidden>
+              Caps Lock is on
+            </p>
+
             <p class="field-error" id="password-error" hidden>
               <img src="./assets/images/icon-alert.svg" alt="" width="16" height="16">
               <span></span>
@@ -166,6 +187,10 @@
                 <img src="./assets/images/icon-eye.svg" alt="" width="20" height="20">
               </button>
             </div>
+
+            <p class="caps-warning" id="confirm-caps-warning" role="status" hidden>
+              Caps Lock is on
+            </p>
 
             <p class="field-error" id="confirm-password-error" hidden>
               <img src="./assets/images/icon-alert.svg" alt="" width="16" height="16">

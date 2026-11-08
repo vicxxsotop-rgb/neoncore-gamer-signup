@@ -218,6 +218,26 @@
   });
 
   /* ----------------------------------------------------------------------
+     Caps Lock warning
+     ---------------------------------------------------------------------- */
+
+  const passwordCapsWarning = document.getElementById("login-password-caps-warning");
+
+  function updateCapsLock(event) {
+    const capsOn =
+      typeof event.getModifierState === "function" &&
+      event.getModifierState("CapsLock");
+
+    passwordCapsWarning.hidden = !capsOn;
+  }
+
+  password.addEventListener("keydown", updateCapsLock);
+  password.addEventListener("keyup", updateCapsLock);
+  password.addEventListener("blur", () => {
+    passwordCapsWarning.hidden = true;
+  });
+
+  /* ----------------------------------------------------------------------
      Submit
      ---------------------------------------------------------------------- */
 

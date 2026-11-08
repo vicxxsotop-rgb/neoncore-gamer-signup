@@ -354,6 +354,33 @@
   });
 
   /* ----------------------------------------------------------------------
+     Caps Lock warning
+     ---------------------------------------------------------------------- */
+
+  function watchCapsLock(input, warning) {
+    if (!input || !warning) {
+      return;
+    }
+
+    const update = (event) => {
+      const capsOn =
+        typeof event.getModifierState === "function" &&
+        event.getModifierState("CapsLock");
+
+      warning.hidden = !capsOn;
+    };
+
+    input.addEventListener("keydown", update);
+    input.addEventListener("keyup", update);
+    input.addEventListener("blur", () => {
+      warning.hidden = true;
+    });
+  }
+
+  watchCapsLock(inputs.password, document.getElementById("password-caps-warning"));
+  watchCapsLock(inputs.confirm, document.getElementById("confirm-caps-warning"));
+
+  /* ----------------------------------------------------------------------
      Submit
      ---------------------------------------------------------------------- */
 

@@ -40,12 +40,14 @@ The Operator ID readout beside the form is an optional extra from the brief. It 
 - Live error clearing and a valid-field check icon.
 - Password strength meter with four levels: Weak, Fair, Good, and Strong.
 - Show/hide controls for both password fields.
+- Caps Lock warning while typing in a password field.
 - Loading state with `Transmitting_` and a blinking caret.
 - Success screen with focus moved to the success heading.
 - Live Operator ID panel on desktop.
 - Matching login page with callsign-or-email validation, show/hide password, loading, and success states.
 - Responsive layout from 320px to large desktop screens.
 - Reduced-motion support, dark autofill, text selection, and scrollbar styling.
+- Social preview metadata (Open Graph and Twitter cards) for both pages.
 
 > **Demo only:** there is no backend. The forms simulate a 1.4-second request and do not send or store any data. The Terms and Privacy Policy text is shown for demonstration purposes; no legal pages are included.
 
@@ -61,7 +63,7 @@ The Operator ID readout beside the form is an optional extra from the brief. It 
 - CSS custom properties, Grid, Flexbox, `clamp()`, and media queries
 - Vanilla JavaScript (ES6)
 - No frameworks, dependencies, or build step
-- Orbitron and JetBrains Mono variable fonts (self-hosted)
+- Orbitron and JetBrains Mono variable fonts (self-hosted WOFF2 subsets)
 - Chrome DevTools, Lighthouse, and VS Code Live Server for testing
 
 ## Project structure
@@ -140,6 +142,7 @@ The score is capped at 4: **Weak**, **Fair**, **Good**, or **Strong**. Strength 
 - Invalid fields receive `aria-invalid="true"`; errors are cleared as soon as the value is fixed.
 - The password strength changes and form status use polite live regions.
 - Show/hide buttons use `aria-pressed` and update their accessible label.
+- A Caps Lock warning appears while typing in a password field and is announced through a status region.
 - The loading button uses `aria-busy` and `aria-disabled`; it stays focusable so keyboard and screen reader users do not lose their place.
 - Focus moves to the first invalid field on submit and to the success heading after submission.
 - Eye buttons have a 44×44px touch target.
@@ -205,12 +208,12 @@ These are the main issues found while building and reviewing the project:
 - How to build responsive layouts with Grid, `clamp()`, and a small number of well-chosen breakpoints.
 - How to test with Lighthouse and still check things Lighthouse cannot catch, such as placeholder contrast, focus behaviour, and touch target size.
 - How to publish a static site with relative paths so it works from a GitHub Pages subfolder.
+- How to serve variable fonts as WOFF2 subsets so the page only downloads the characters it needs.
 
 ## Continued development
 
 Ideas from the challenge that are not part of the current version:
 
-- Warn when Caps Lock is on while typing a password.
 - Shake the panel on an invalid submit, with a reduced-motion fallback.
 - Animate the success hex check so it draws itself.
 - Add a real backend and authentication.
