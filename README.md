@@ -64,6 +64,7 @@ The Operator ID readout beside the form is an optional extra from the brief. It 
 - Vanilla JavaScript (ES6)
 - No frameworks, dependencies, or build step
 - Orbitron and JetBrains Mono variable fonts (self-hosted WOFF2 subsets)
+- Playwright for end-to-end tests (development only)
 - Chrome DevTools, Lighthouse, and VS Code Live Server for testing
 
 ## Project structure
@@ -82,6 +83,9 @@ The Operator ID readout beside the form is an optional extra from the brief. It 
 │   └── images/
 ├── design/               # Design references, not used by the site
 ├── screenshots/          # Images used in this README
+├── tests/                # Playwright tests (development only)
+├── package.json          # Test scripts (development only)
+├── playwright.config.js  # Test runner configuration (development only)
 ├── style-guide.md        # Colours, fonts, and spacing from the challenge
 ├── LICENSE
 └── README.md
@@ -89,7 +93,7 @@ The Operator ID readout beside the form is an optional extra from the brief. It 
 
 ## Getting started
 
-There is no installation or build step.
+The site itself has no dependencies or build step.
 
 1. Clone the repository:
 
@@ -101,6 +105,13 @@ There is no installation or build step.
 2. Open `index.html` in a browser, or serve the folder with VS Code Live Server or `npx serve .`.
 
 3. Open `login.html` to try the matching login page.
+
+4. Optional: run the automated tests. This needs Node.js 18 or newer.
+
+   ```bash
+   npm install
+   npm test
+   ```
 
 ## How the form works
 
@@ -166,6 +177,29 @@ Tested at **320, 375, 768, 1024, 1280, 1440, and 1920px** with no horizontal ove
 | 1280px+ | Two columns, 1180px container; desktop heading |
 | 1440px | Two columns; heading 72px |
 
+### Automated tests
+
+Playwright is a development-only dependency; the deployed site does not load it.
+
+```bash
+npm install
+npm test
+```
+
+The suite starts a local server on port 4173 and runs every case at a desktop (1440×900) and a mobile (Pixel 5) viewport. It covers:
+
+- empty and invalid submits, including focus and the status message
+- error clearing while typing
+- all four password strength levels
+- show/hide password buttons
+- the Caps Lock warning
+- loading and success states
+- no horizontal overflow at 320px
+
+Other commands: `npm run test:headed` (watch the browser), `npm run test:ui` (interactive runner), `npm run test:report` (last HTML report).
+
+The tests reuse your installed Google Chrome, so Playwright does not download a browser. To use Playwright's bundled Chromium instead, run `npx playwright install chromium` and remove `channel: "chrome"` from `playwright.config.js`.
+
 ### Manual checks
 
 - Complete sign-up and login flows with mouse and keyboard.
@@ -209,6 +243,7 @@ These are the main issues found while building and reviewing the project:
 - How to test with Lighthouse and still check things Lighthouse cannot catch, such as placeholder contrast, focus behaviour, and touch target size.
 - How to publish a static site with relative paths so it works from a GitHub Pages subfolder.
 - How to serve variable fonts as WOFF2 subsets so the page only downloads the characters it needs.
+- How to write end-to-end tests that check focus, ARIA state, and layout, not just visible text.
 
 ## Continued development
 
