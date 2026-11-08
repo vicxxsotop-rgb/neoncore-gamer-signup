@@ -9,6 +9,7 @@ A responsive, accessible sign-up experience for a competitive gaming network, bu
 - **Live site:** [vicxxsotop-rgb.github.io/neoncore-gamer-signup](https://vicxxsotop-rgb.github.io/neoncore-gamer-signup/)
 - **Login page:** [vicxxsotop-rgb.github.io/neoncore-gamer-signup/login.html](https://vicxxsotop-rgb.github.io/neoncore-gamer-signup/login.html)
 - **Repository:** [github.com/vicxxsotop-rgb/neoncore-gamer-signup](https://github.com/vicxxsotop-rgb/neoncore-gamer-signup)
+- **Frontend Mentor solution:** [NEONCORE — Responsive Gamer Form](https://www.frontendmentor.io/solutions/neoncore---responsive-gamer-form-fhabXh7yI5)
 - **Challenge:** [Gamer sign-up form on Frontend Mentor](https://www.frontendmentor.io/challenges/gamer-sign-up-form)
 
 ## Overview
@@ -223,7 +224,8 @@ I used OpenCode with an AI assistant as a pair-programming partner. I defined th
 ## Author
 
 - GitHub: [@vicxxsotop-rgb](https://github.com/vicxxsotop-rgb)
-- Frontend Mentor challenge: [Gamer sign-up form](https://www.frontendmentor.io/challenges/gamer-sign-up-form)
+- Frontend Mentor solution: [NEONCORE — Responsive Gamer Form](https://www.frontendmentor.io/solutions/neoncore---responsive-gamer-form-fhabXh7yI5)
+- Challenge: [Gamer sign-up form](https://www.frontendmentor.io/challenges/gamer-sign-up-form)
 
 ## Acknowledgments
 
