@@ -91,6 +91,35 @@ The Operator ID readout beside the form is an optional extra from the brief. It 
 └── README.md
 ```
 
+## Code organization
+
+### CSS
+
+`style.css` is a single file grouped into commented sections, so a change is easy to find:
+
+| Section | What it holds |
+| --- | --- |
+| Fonts, Tokens | `@font-face` rules and the custom properties for colour and type |
+| Base, Background, Layout | Reset, page backdrop, and the two-column grid |
+| Brand | Logo, heading, and the Operator ID panel |
+| Form panel, Fields | Form shell, labels, inputs, hints, and error messages |
+| Password strength, Terms checkbox, Submit button | The stateful parts of the form |
+| Sign-up / log-in switch, Success view, Footer | The remaining views |
+| Responsive, Reduced motion | Breakpoints and the motion preference |
+
+### JavaScript
+
+`script.js` keeps the validation rules in small, named functions instead of one long submit handler:
+
+- `validateField(field)` runs the rule for one field and returns the result.
+- `showFieldError`, `showFieldValid`, and `resetField` update the message, the check icon, and `aria-invalid`.
+- `getStrengthScore` and `updateStrength` handle the password meter.
+- `setCheck` and `updateOperator` update the Operator ID readout.
+- `setPasswordVisibility` and `watchCapsLock` handle the password controls.
+- `announce` writes to the live region, and `submitForm` connects the whole flow.
+
+`login.js` follows the same pattern with `updateSession`, `updateCapsLock`, and its own `submitForm`.
+
 ## Getting started
 
 The site itself has no dependencies or build step.
